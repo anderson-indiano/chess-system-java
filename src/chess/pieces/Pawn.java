@@ -4,18 +4,16 @@ import boardgame.Board;
 import chess.ChessPiece;
 import chess.Color;
 
-public class King extends ChessPiece{
+public class Pawn extends ChessPiece {
+//private ChessMatch chessMatch;
 	
-//	private ChessMatch chessMatch;
-
-	public King(Board board, Color color) {
+	public Pawn(Board board, Color color) {
 		super(board, color);
 //		this.chessMatch = chessMatch;
 	}
-
+	
 	@Override
 	public String toString() {
-		return "K";
+		return "P";
 	}
-
 }
