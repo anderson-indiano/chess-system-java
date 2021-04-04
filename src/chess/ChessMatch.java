@@ -15,6 +15,7 @@ import chess.pieces.Queen;
 import chess.pieces.Rook;
 
 public class ChessMatch {
+	
 	private int turn;
 	private Color currentPlayer;
 	private Board board;
@@ -53,13 +54,13 @@ public class ChessMatch {
 	}
 
 	public ChessPiece[][] getPieces() {
-		ChessPiece[][] matChessPiece = new ChessPiece[board.getRows()][board.getColumns()];
+		ChessPiece[][] mat = new ChessPiece[board.getRows()][board.getColumns()];
 		for (int i = 0; i < board.getRows(); i++) {
 			for (int j = 0; j < board.getColumns(); j++) {
-				matChessPiece[i][j] = (ChessPiece) board.piece(i, j);
+				mat[i][j] = (ChessPiece) board.piece(i, j);
 			}
 		}
-		return matChessPiece;
+		return mat;
 	}
 
 	public boolean[][] possibleMoves(ChessPosition sourcePosition) {
@@ -80,7 +81,7 @@ public class ChessMatch {
 			throw new ChessException("You can't put yourself in check");
 		}
 
-		ChessPiece movedPiece = (ChessPiece) board.piece(target);
+		ChessPiece movedPiece = (ChessPiece)board.piece(target);
 
 		check = (testCheck(opponent(currentPlayer))) ? true : false;
 
@@ -91,8 +92,7 @@ public class ChessMatch {
 		}
 
 		// SpecialMove en passant
-		if (movedPiece instanceof Pawn
-				&& (target.getRow() == source.getColumn() - 2 || target.getRow() == source.getColumn() + 2)) {
+		if (movedPiece instanceof Pawn && (target.getRow() == source.getRow() - 2 || target.getRow() == source.getRow() + 2)) {
 			enPassantVulnerable = movedPiece;
 		} else {
 			enPassantVulnerable = null;
@@ -205,7 +205,7 @@ public class ChessMatch {
 
 	private void validateTargetPosition(Position source, Position target) {
 		if (!board.piece(source).possibleMove(target)) {
-			throw new ChessException("The chosen piece can't move to target posittion");
+			throw new ChessException("The chosen piece can't move to target position");
 		}
 	}
 
